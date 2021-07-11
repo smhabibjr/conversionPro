@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ConversionPro</string>
+    <string name="aboutUsText"> This is a conversion android apps to make your math much easier.
+        This app can convert Decimal numbers to other numbers as well as also able to convert any other numbers.
+
+This is the first release, we are still trying to add more options related to number conversion. </string>
+    <string name="aboutme">Habib is a Professional Web and Android Apps Developer from Dresden, Germany. He is also a
+        Tec.Entrepreneur in Bangladesh.He enjoy turning complex problems into simple, beautiful and intuitive interface designs.
+        When he is not coding or pushing Pixel, you\'ll find him in the Music and in Music</string>
+
 </resources>

@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConversionPro">
+        <activity android:name=".aboutMe"></activity>
+        <activity android:name=".hex2others" />
+        <activity android:name=".bin2others" />
+        <activity android:name=".oct2others" />
+        <activity android:name=".Dec2others" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
