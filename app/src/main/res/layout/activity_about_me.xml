@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10sp"
-                android:text="Hotline Bangladesh"
+                android:text="Conversions Pro"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 

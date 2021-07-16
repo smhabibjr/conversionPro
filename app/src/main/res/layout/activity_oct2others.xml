@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/white"
                 android:ems="10"
+                android:digits="01234567"
                 android:textSize="15sp"
                 android:textColor="@color/white"
                 android:gravity="center"
