@@ -8,6 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.facebook.ads.*;
 
 public class aboutMe extends AppCompatActivity {
 
@@ -15,6 +19,9 @@ public class aboutMe extends AppCompatActivity {
     public static String PACKAGE_NAME;
 
     private ImageView fbBtn, instraBtn, twitterBtn, youtubeBtn, gitBtn;
+
+    //fb ads
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +71,48 @@ public class aboutMe extends AppCompatActivity {
                 gotogiturl("https://github.com/smhabibjr");
             }
         });
+
+        //fb ads
+        adView = new AdView(this, "518801612690957_522908128946972", AdSize.BANNER_HEIGHT_50);
+
+        // Find the Ad Container
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+
+        // Add the ad view to your activity layout
+        adContainer.addView(adView);
+
+        // Request an ad
+        adView.loadAd();
+
+        AdListener adListener = new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Toast.makeText(
+                        aboutMe.this,
+                        "Error: " + adError.getErrorMessage(),
+                        Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Ad loaded callback
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+            }
+        };
+
+        // Request an ad
+        adView.loadAd(adView.buildLoadAdConfig().withAdListener(adListener).build());
     }
 
     private void gotogiturl(String s) {
@@ -108,5 +157,15 @@ public class aboutMe extends AppCompatActivity {
         String value = "https://play.google.com/store/apps/details?id="+PACKAGE_NAME;
         intent.putExtra(Intent.EXTRA_TEXT,value);
         startActivity(Intent.createChooser(intent, "Spread Your Love"));
+    }
+
+    //fb ads
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 }

@@ -8,9 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.facebook.ads.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
     //for share it button
     public static String PACKAGE_NAME;
+
+    //fb ads
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +66,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //fb ads
+        adView = new AdView(this, "518801612690957_522283392342779", AdSize.BANNER_HEIGHT_50);
+
+        // Find the Ad Container
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+
+        // Add the ad view to your activity layout
+        adContainer.addView(adView);
+
+        // Request an ad
+        adView.loadAd();
+
+        AdListener adListener = new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Toast.makeText(
+                        MainActivity.this,
+                        "Error: " + adError.getErrorMessage(),
+                        Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Ad loaded callback
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+            }
+        };
+
+        // Request an ad
+        adView.loadAd(adView.buildLoadAdConfig().withAdListener(adListener).build());
+
     }
-
-
-
 
     private void open_oct2others_activity() {
         Intent open_oct2others = new Intent(this, oct2others.class);
@@ -108,5 +151,15 @@ public class MainActivity extends AppCompatActivity {
     public void aboutUs(View view) {
         Intent aboutMe = new Intent(this, aboutMe.class);
         startActivity(aboutMe);
+    }
+
+    //fb ads
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 }
